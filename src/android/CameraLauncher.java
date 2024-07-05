@@ -325,14 +325,14 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
     }
 
     private boolean hasPermissions(String[] permissions) {
-            for (String permission: permissions) {
-                if (!PermissionHelper.hasPermission(this, permission)) {
-                    return false;
-                }
+        for (String permission: permissions) {
+            if (!PermissionHelper.hasPermission(this, permission)) {
+                return false;
             }
-            return true;
         }
+        return true;
     }
+    
 
     public void takePicture(int returnType, int encodingType)
     {
