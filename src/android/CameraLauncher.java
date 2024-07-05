@@ -235,26 +235,29 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
         return cache.getAbsolutePath();
     }
 
+    private static final String READ_MEDIA_IMAGES = "android.permission.READ_MEDIA_IMAGES";
+    private static final String READ_MEDIA_VIDEO = "android.permission.READ_MEDIA_VIDEO";
+
      private String[] getPermissions(boolean storageOnly, int mediaType) {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (android.os.Build.VERSION.SDK_INT >= 33) {
             if (storageOnly) {
                 switch (mediaType) {
                     case PICTURE:
-                        return new String[]{ Manifest.permission.READ_MEDIA_IMAGES };
+                        return new String[]{ READ_MEDIA_IMAGES };
                     case VIDEO:
-                        return new String[]{ Manifest.permission.READ_MEDIA_VIDEO };
+                        return new String[]{ READ_MEDIA_VIDEO };
                     default:
-                        return new String[]{ Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_VIDEO };
+                        return new String[]{ READ_MEDIA_IMAGES, READ_MEDIA_VIDEO };
                 }
             }
             else {
                 switch (mediaType) {
                     case PICTURE:
-                        return new String[]{ Manifest.permission.CAMERA, Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES };
+                        return new String[]{ Manifest.permission.CAMERA, Manifest.permission.CAMERA, READ_MEDIA_IMAGES };
                     case VIDEO:
-                        return new String[]{ Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_VIDEO };
+                        return new String[]{ Manifest.permission.CAMERA, READ_MEDIA_VIDEO };
                     default:
-                        return new String[]{ Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_VIDEO };
+                        return new String[]{ Manifest.permission.CAMERA, READ_MEDIA_IMAGES, READ_MEDIA_VIDEO };
                 }
             }
         } else {
